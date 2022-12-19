@@ -1,5 +1,8 @@
 .App {
   text-align: center;
+  background-color: rgb(6,12,233);
+  min-height: 100vh;
+  color: white;
 }
 
 .App-logo {
@@ -13,21 +16,105 @@
   }
 }
 
-.App-header {
-  background-color: #282c34;
+.App-flex-v {
+  display: flex;
   min-height: 100vh;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.App-flex-v .App-flex-v{
+  min-height: auto;
+}
+.App-flex-h {
+  display: flex;
+  min-width: 100vw;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+.App-flex-v-small {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+.App-header{
   font-size: calc(10px + 2vmin);
-  color: white;
+}
+.App-flex-grow{
+  flex-grow: 1;
+}
+.App-flex-grow-p8{
+  flex-grow: 0.8;
 }
 
-.App-link {
+.App a {
   color: #61dafb;
 }
-
+.App a.disabled {
+  color: grey;
+  cursor: default;
+}
+.App button {
+  font-size: 2em;
+  background: rgb(31, 99, 0);
+  color: white;
+  border-radius: .2em;
+  border-color: white;
+  padding: 4px;
+  margin: 4px;
+}
+.App button:disabled{
+  filter: grayscale();
+}
+.logo-tiny{
+  height: 14vh;
+}
+table.jeopardy{
+  width: 100vw;
+  border-collapse: collapse;
+}
+table.jeopardy th, td{
+  border: 2px solid black;
+  height: 13vh;
+  font-size: 6vh;
+}
+table.jeopardy th{
+  text-transform: capitalize;
+  font-weight: bold;
+  color: white;
+}
+table.jeopardy td{
+  cursor: pointer;
+  color: gold;
+  font-weight: bolder;
+}
+.modal{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgb(6,12,233);
+}
+.modal .question{
+  font-size: 25vh;
+  white-space: pre-wrap;
+}
+.modal button.blue{
+  background-color: gold;
+  color: black;
+  font-weight: bold;
+  width: 44px;
+}
+.team-display span:first-child{
+  height: 49%;
+  margin: auto;
+  background: rgb(31, 99, 0);
+  border: 1px solid white;
+  border-radius: 4px;
+}
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

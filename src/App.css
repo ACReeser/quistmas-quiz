@@ -123,3 +123,6 @@ table.jeopardy td{
     transform: rotate(360deg);
   }
 }
+button.team-name-small{
+  font-size: 1.5em;
+}

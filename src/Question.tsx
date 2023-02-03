@@ -21,12 +21,12 @@ function Question(props: {
         <div className='App-flex-h'>
             {
                 props.teams.map((teamName, i) => {
-                    return <button onClick={() => props.close(i)}>
+                    return <button onClick={() => props.close(i)} className="team-name-small">
                         {teamName} ✅
                     </button>
                 })
             }
-            <button onClick={() => props.close(-1)}>
+            <button onClick={() => props.close(-1)} className="team-name-small">
                 All Wrong ❌
             </button>
             <button className='blue' onClick={() => {

@@ -7,40 +7,48 @@ interface IGameState{
     name: string,
     rows: {
       points: number|null,
+      imgSrc?: string,
       question: string,
       size: string,
       answer: string
     }[]
   }[],
   pointSum: number[],
-  currentQuestion?: {question: string, categoryI: number, rowI: number, size: string, answer: string}
+  currentQuestion?: {
+    question: string, 
+    categoryI: number, 
+    rowI: number, 
+    size: string, 
+    answer: string,
+    imgSrc?: string
+  }
 }
 
 function beginGameState(teams: string[]): IGameState{
   return {
     categories: [
       {
-        name: 'Christmas Cine-moji',
+        name: 'Melodymoji',
         rows: [
-          {points: 100, question: 'Plot:\n🎅🦷⛏️🌨️🔴', size: '20vh', answer: 'Rudolph the Red Nose Reindeer'}, 
-          {points: 200, question: 'Title (sounds like):\n📅❌🏜️🦀', size: '22vh', answer: 'Year Without a Sandy Claws'}, 
-          {points: 300, question: 'Props:\n⏰🍕📼🚂🕷️', size: '22vh', answer: "Home Alone"},
-          {points: 400, question: 'Scenes:\n⛰️🐶🍖🎄🎁', size: '22vh', answer:'How the Grinch Stole Christmas'},
-          {points: 500, question: 'Plot:\n🦃👴👊⚖️💌🏡', size: '22vh', answer: 'Miracle on 34th St'},
+          {points: 100, question: '\n😁2️⃣🌎🌍🌏', size: '22vh', answer: '\'Joy to the World\''},
+          {points: 200, question: '\n❗🎺😇🎶', size: '22vh', answer: '\'Hark the Herald Angels Sing\''}, 
+          {points: 300, question: '\n⬆️😮⌚📆', size: '21vh', answer: '\'It\'s the\nMost Wonderful Time of the Year \''}, 
+          {points: 400, question: '\n⭕⭐😮⭐🌒', size: '21vh', answer:'"O star of wonder, star of night"\n\'We Three Kings\''},
+          {points: 500, question: '\n🍁🫵🦵🦵', size: '22vh', answer: '"Fall on your knees"\n\'O Holy Night\''},
         ]
       },
       {
-        name: 'Yultide Lyrics',
+        name: 'Famous Elves',
         rows: [
-          {points: 100, question: "And everyone is singing\n(oh, yeah)\nI hear those sleigh bells ringing (Oh)", size: '14vh', answer: 'All I Want For Christmas Is You'}, 
-          {points: 200, question: "Dolls that will talk and will go for a walk \/\nIs the hope of Janice and Jen;", size: '14vh', answer: "It's Beginning to Look a Lot Like Christmas"}, 
-          {points: 300, question: "It'll nearly be like a\npicture print \/\nBy Currier and Ives", size: '16vh', answer: 'Sleigh Ride'}, 
-          {points: 400, question: "And there it did both stop and stay \/\nRight over the place where Jesus lay.", size: '16vh', answer: 'The First Noel'}, 
-          {points: 500, question: "Hurry down the chimney tonight \/\nHurry, tonight", size: '18vh', answer: 'Santa Baby'}, 
+          {points: 100, question: "", imgSrc: '/question-imgs/buddy_cropped.png', size: '14vh', answer: '\n\n\nBuddy'}, 
+          {points: 200, question: "", imgSrc: '/question-imgs/bernard.png', size: '14vh', answer: "\n\n\nBernard"}, 
+          {points: 300, question: "", imgSrc: '/question-imgs/hermey.jpg', size: '16vh', answer: '\n\n\nHermey'}, 
+          {points: 400, question: "", imgSrc: '/question-imgs/jangle_jingle.jpg', size: '16vh', answer: '\n\n\nJingle & Jangle'}, 
+          {points: 500, question: "", imgSrc: '/question-imgs/wayne.jpg', size: '18vh', answer: 'Wayne\n\n\'Prep & Landing\''}, 
         ]
       },
       {
-        name: 'Holiday Hodegepodge',
+        name: 'Holiday Hodgepodge',
         rows: [
           {points: 100, question: "Which one of Santa's reindeer has the same name as another holiday mascot?", size: '15vh', answer: 'Cupid'}, 
           {points: 200, question: "What did my true love give to me on the eighth day of Christmas?", size: '15vh', answer: '8 Maids a Milking'}, 
@@ -104,7 +112,14 @@ function Game(props: {
         if (row){
           setState({
             ...state,
-            currentQuestion: {question: row.question, categoryI: catI, rowI: rowI, size: row.size, answer: row.answer}
+            currentQuestion: {
+              question: row.question, 
+              categoryI: catI, 
+              rowI: rowI, 
+              size: row.size, 
+              answer: row.answer,
+              imgSrc: row.imgSrc
+            }
           });
         }
       }
@@ -179,7 +194,7 @@ function Game(props: {
       </div>
       {
         state.currentQuestion != null ? 
-        <Question teams={props.teams} question={state.currentQuestion.question} size={state.currentQuestion.size} answer={state.currentQuestion.answer} close={(teamIndexForPoints: number) => {
+        <Question teams={props.teams} question={state.currentQuestion.question} size={state.currentQuestion.size} answer={state.currentQuestion.answer} imgSrc={state.currentQuestion.imgSrc} close={(teamIndexForPoints: number) => {
           const categories = {...state.categories};
           const newPoints = [...state.pointSum];
           if (state.currentQuestion){

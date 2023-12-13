@@ -1,6 +1,6 @@
 export const AlphaQuestions = [
     {
-      name: 'Christmas Cine-moji',
+      name: 'Christmas Cinemoji',
       rows: [
         {points: 100, question: 'Characters:\n💀🐶🧵\n🔊🐛🎅', size: '20vh', answer: 'Nightmare Before Christmas'}, //nightmare before christmas
         {points: 200, question: 'Title:\n☠️💎', size: '25vh', answer: 'Die Hard'}, // Die Hard
@@ -20,7 +20,7 @@ export const AlphaQuestions = [
       ]
     },
     {
-      name: 'Holiday Hodegepodge',
+      name: 'Holiday Hodgepodge',
       rows: [
         {points: 100, question: "A comet, a conjunction,\nand a 'hypernova' are all hypothetical origins of this bilical nativity spectacle. ", size: '15vh', answer: 'The Star of Bethlehem'}, // star of bethlehem
         {points: 200, question: 'Cookies and candies fill children\'s clogs in this European country.', size: '20vh', answer: 'The Netherlands'}, //Netherlands
@@ -30,3 +30,36 @@ export const AlphaQuestions = [
       ]
     }
   ];
+
+export const QuestionSet2 = [
+  {
+    name: 'Christmas Cinemoji',
+    rows: [
+      {points: 100, question: 'Plot:\n🎅🦷⛏️🌨️🔴', size: '20vh', answer: 'Rudolph the Red Nose Reindeer'}, 
+      {points: 200, question: 'Title (sounds like):\n📅❌🏜️🦀', size: '22vh', answer: 'Year Without a Sandy Claws'}, 
+      {points: 300, question: 'Props:\n⏰🍕📼🚂🕷️', size: '22vh', answer: "Home Alone"},
+      {points: 400, question: 'Scenes:\n⛰️🐶🍖🎄🎁', size: '22vh', answer:'How the Grinch Stole Christmas'},
+      {points: 500, question: 'Plot:\n🦃👴👊⚖️💌🏡', size: '22vh', answer: 'Miracle on 34th St'},
+    ]
+  },
+  {
+    name: 'Yultide Lyrics',
+    rows: [
+      {points: 100, question: "And everyone is singing\n(oh, yeah)\nI hear those sleigh bells ringing (Oh)", size: '14vh', answer: 'All I Want For Christmas Is You'}, 
+      {points: 200, question: "Dolls that will talk and will go for a walk \/\nIs the hope of Janice and Jen;", size: '14vh', answer: "It's Beginning to Look a Lot Like Christmas"}, 
+      {points: 300, question: "It'll nearly be like a\npicture print \/\nBy Currier and Ives", size: '16vh', answer: 'Sleigh Ride'}, 
+      {points: 400, question: "And there it did both stop and stay \/\nRight over the place where Jesus lay.", size: '16vh', answer: 'The First Noel'}, 
+      {points: 500, question: "Hurry down the chimney tonight \/\nHurry, tonight", size: '18vh', answer: 'Santa Baby'}, 
+    ]
+  },
+  {
+    name: 'Holiday Hodgepodge',
+    rows: [
+      {points: 100, question: "Which one of Santa's reindeer has the same name as another holiday mascot?", size: '15vh', answer: 'Cupid'}, 
+      {points: 200, question: "What did my true love give to me on the eighth day of Christmas?", size: '15vh', answer: '8 Maids a Milking'}, 
+      {points: 300, question: "Stars, needle, plate, dendrite, column, lacy, and capped column are the six main types of what?", size: '15vh', answer: 'Snowflakes'}, 
+      {points: 400, question: "Which incredibly popular Christmas song was originally written for Thanksgiving in 1857?", size: '15vh', answer: 'Jingle Bells'}, 
+      {points: 500, question: "In which modern-day country was the canonical Saint Nicholas born in?", size: '15vh', answer: 'Turkey (Lycia, Asia Minor)'}
+    ]
+  }
+]

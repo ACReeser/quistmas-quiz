@@ -7,15 +7,21 @@ function Question(props: {
     question: string,
     size: string,
     answer: string,
+    imgSrc?: string,
     close: (teamIndexForPoints: number) => void
   }) {
     
-  const [showQuestion, setQuestionOrAnswer] = useState(true)
+  const [showQuestion, setQuestionOrAnswer] = useState(true);
+  const imageDetails = {
+    background: props.imgSrc != null ? `url(${props.imgSrc})` : '',
+    class: props.imgSrc != null ? 'is-image' : '',
+  };
+  const answerText = props.imgSrc != null ? props.answer : 'A: '+props.answer;
   return (
     <div className="modal">
-        <div className="question" style={{'fontSize': props.size}}>
+        <div className={"question "+imageDetails.class} style={{'fontSize': props.size, backgroundImage: imageDetails.background}}>
             {
-                showQuestion ? props.question : 'A: '+props.answer
+                showQuestion ? props.question : answerText
             }
         </div>
         <div className='App-flex-h'>

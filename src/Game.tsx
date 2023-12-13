@@ -40,11 +40,11 @@ function beginGameState(teams: string[]): IGameState{
       {
         name: 'Famous Elves',
         rows: [
-          {points: 100, question: "", imgSrc: '/question-imgs/buddy_cropped.png', size: '14vh', answer: '\n\n\nBuddy'}, 
-          {points: 200, question: "", imgSrc: '/question-imgs/bernard.png', size: '14vh', answer: "\n\n\nBernard"}, 
-          {points: 300, question: "", imgSrc: '/question-imgs/hermey.jpg', size: '16vh', answer: '\n\n\nHermey'}, 
-          {points: 400, question: "", imgSrc: '/question-imgs/jangle_jingle.jpg', size: '16vh', answer: '\n\n\nJingle & Jangle'}, 
-          {points: 500, question: "", imgSrc: '/question-imgs/wayne.jpg', size: '18vh', answer: 'Wayne\n\n\'Prep & Landing\''}, 
+          {points: 100, question: "", imgSrc: 'https://i.imgur.com/Fa3CN5a.png', size: '14vh', answer: '\n\n\nBuddy'}, 
+          {points: 200, question: "", imgSrc: 'https://i.imgur.com/K6GyyJ8.png', size: '14vh', answer: "\n\n\nBernard"}, 
+          {points: 300, question: "", imgSrc: 'https://i.imgur.com/Z9UD8kp.jpg', size: '16vh', answer: '\n\n\nHermey'}, 
+          {points: 400, question: "", imgSrc: 'https://i.imgur.com/D3ySiIU.jpg', size: '16vh', answer: '\n\n\nJingle & Jangle'}, 
+          {points: 500, question: "", imgSrc: 'https://i.imgur.com/i6Nqpg0.jpg', size: '18vh', answer: 'Wayne\n\n\'Prep & Landing\''}, 
         ]
       },
       {

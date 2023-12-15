@@ -48,13 +48,23 @@ function beginGameState(teams: string[]): IGameState{
         ]
       },
       {
+        name: 'Tree Trivia',
+        rows: [
+          {points: 100, question: "Europeans in the 17th century lit ____ on their trees.", size: '18vh', answer: 'Candles.'}, 
+          {points: 200, question: "Which PNW US state cuts the most trees, at 4.7 million trees a year?", size: '16vh', answer: "Oregon"}, 
+          {points: 300, question: "Which U. S. President was the first to decorate a Christmas tree with electric lights?", size: '14vh', answer: 'Grover Cleveland in 1894'}, 
+          {points: 400, question: "Which English queen established the Christmas tree tradition in Great Britain?", size: '14vh', answer: 'Queen Victoria in 1848'}, 
+          {points: 500, question: "Which store sold the first pre-lit Christmas trees?", size: '18vh', answer: 'Target'}, 
+        ]
+      },
+      {
         name: 'Holiday Hodgepodge',
         rows: [
-          {points: 100, question: "Which one of Santa's reindeer has the same name as another holiday mascot?", size: '15vh', answer: 'Cupid'}, 
-          {points: 200, question: "What did my true love give to me on the eighth day of Christmas?", size: '15vh', answer: '8 Maids a Milking'}, 
-          {points: 300, question: "Stars, needle, plate, dendrite, column, lacy, and capped column are the six main types of what?", size: '15vh', answer: 'Snowflakes'}, 
-          {points: 400, question: "Which incredibly popular Christmas song was originally written for Thanksgiving in 1857?", size: '15vh', answer: 'Jingle Bells'}, 
-          {points: 500, question: "In which modern-day country was the canonical Saint Nicholas born in?", size: '15vh', answer: 'Turkey (Lycia, Asia Minor)'}
+          {points: 100, question: "In which town was the baby Jesus born?", size: '18vh', answer: 'Bethlehem'}, 
+          {points: 200, question: "Who said \"Maybe Christmas doesn't come from a store, maybe Christmas, perhaps means more\"?", size: '14vh', answer: 'The Grinch'}, 
+          {points: 300, question: "Which American author wrote \"The Gift of the Magi\"?", size: '16vh', answer: 'O. Henry'}, 
+          {points: 400, question: "In which fantasy land is it \"always winter but never Christmas\"?", size: '15vh', answer: 'Narnia'}, 
+          {points: 500, question: "In what country is it a tradition to eat Kentucky Fried Chicken (KFC) on Christmas?", size: '15vh', answer: 'Japan. Orders must be placed up to two months in advance.'}
         ]
       }
     ],
@@ -140,38 +150,41 @@ function Game(props: {
               <th>
                 {state.categories[2].name}
               </th>
+              <th>
+                {state.categories[3].name}
+              </th>
             </tr>
             <tr>
               {
-                [0, 1, 2].map((cat) => {
+                [0, 1, 2, 3].map((cat) => {
                   return <td onClick={zoomQuestion(cat, 0)}>{state.categories[cat].rows[0].points}</td>
                 })
               }
             </tr>
             <tr>
               {
-                [0, 1, 2].map((cat) => {
+                [0, 1, 2, 3].map((cat) => {
                   return <td onClick={zoomQuestion(cat, 1)}>{state.categories[cat].rows[1].points}</td>
                 })
               }
             </tr>
             <tr>
               {
-                [0, 1, 2].map((cat) => {
+                [0, 1, 2, 3].map((cat) => {
                   return <td onClick={zoomQuestion(cat, 2)}>{state.categories[cat].rows[2].points}</td>
                 })
               }
             </tr>
             <tr>
               {
-                [0, 1, 2].map((cat) => {
+                [0, 1, 2, 3].map((cat) => {
                   return <td onClick={zoomQuestion(cat, 3)}>{state.categories[cat].rows[3].points}</td>
                 })
               }
             </tr>
             <tr>
               {
-                [0, 1, 2].map((cat) => {
+                [0, 1, 2, 3].map((cat) => {
                   return <td onClick={zoomQuestion(cat, 4)}>{state.categories[cat].rows[4].points}</td>
                 })
               }

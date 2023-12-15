@@ -198,9 +198,9 @@ function Game(props: {
         </div>
         {
           props.teams.map((team, i) => {
-            return <div className='App-flex-grow team-display App-flex-v-small'>
-              <span>{team}</span>
-              <span>{state.pointSum[i]}pts </span>
+            return <div className='App-flex-grow team-display App-flex-v-small h-14vh'>
+              <div className="team-display-name">{team}</div>
+              <div className="team-display-points">{state.pointSum[i]} points</div>
             </div>
           })
         }

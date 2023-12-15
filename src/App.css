@@ -119,12 +119,19 @@ table.jeopardy td{
   font-weight: bold;
   width: 44px;
 }
-.team-display span:first-child{
-  height: 49%;
+.team-display .team-display-name{
   margin: auto;
   background: rgb(31, 99, 0);
-  border: 1px solid white;
-  border-radius: 4px;
+  border: 2px solid white;
+  border-radius: 2vh;
+  padding-left: 1vw;  
+  padding-right: 1vw;  
+  font-size: 5vh;
+  margin-top: 1vh;
+}
+.team-display .team-display-points{
+  margin: auto;
+  font-size: 5vh;
 }
 @keyframes App-logo-spin {
   from {
@@ -136,4 +143,7 @@ table.jeopardy td{
 }
 button.team-name-small{
   font-size: 1.5em;
+}
+.h-14vh{
+  height: 14vh;
 }

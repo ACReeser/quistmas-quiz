@@ -62,4 +62,47 @@ export const QuestionSet2 = [
       {points: 500, question: "In which modern-day country was the canonical Saint Nicholas born in?", size: '15vh', answer: 'Turkey (Lycia, Asia Minor)'}
     ]
   }
-]
+];
+
+export const QuestionSet3 = [
+  {
+    name: 'Melodymoji',
+    rows: [
+      {points: 100, question: '\n😁2️⃣🌎🌍🌏', size: '22vh', answer: '\'Joy to the World\''},
+      {points: 200, question: '\n❗🎺😇🎶', size: '22vh', answer: '\'Hark the Herald Angels Sing\''}, 
+      {points: 300, question: '\n⬆️😮⌚📆', size: '21vh', answer: '\'It\'s the\nMost Wonderful Time of the Year \''}, 
+      {points: 400, question: '\n⭕⭐😮⭐🌒', size: '21vh', answer:'"O star of wonder, star of night"\n\'We Three Kings\''},
+      {points: 500, question: '\n🍁🫵🦵🦵', size: '22vh', answer: '"Fall on your knees"\n\'O Holy Night\''},
+    ]
+  },
+  {
+    name: 'Famous Elves',
+    rows: [
+      {points: 100, question: "", imgSrc: 'https://i.imgur.com/Fa3CN5a.png', size: '14vh', answer: '\n\n\nBuddy'}, 
+      {points: 200, question: "", imgSrc: 'https://i.imgur.com/K6GyyJ8.png', size: '14vh', answer: "\n\n\nBernard"}, 
+      {points: 300, question: "", imgSrc: 'https://i.imgur.com/Z9UD8kp.jpg', size: '16vh', answer: '\n\n\nHermey'}, 
+      {points: 400, question: "", imgSrc: 'https://i.imgur.com/D3ySiIU.jpg', size: '16vh', answer: '\n\n\nJingle & Jangle'}, 
+      {points: 500, question: "", imgSrc: 'https://i.imgur.com/i6Nqpg0.jpg', size: '18vh', answer: 'Wayne\n\n\'Prep & Landing\''}, 
+    ]
+  },
+  {
+    name: 'Tree Trivia',
+    rows: [
+      {points: 100, question: "Europeans in the 17th century lit ____ on their trees.", size: '18vh', answer: 'Candles.'}, 
+      {points: 200, question: "Which PNW US state cuts the most trees, at 4.7 million trees a year?", size: '16vh', answer: "Oregon"}, 
+      {points: 300, question: "Which U. S. President was the first to decorate a Christmas tree with electric lights?", size: '14vh', answer: 'Grover Cleveland in 1894'}, 
+      {points: 400, question: "Which English queen established the Christmas tree tradition in Great Britain?", size: '14vh', answer: 'Queen Victoria in 1848'}, 
+      {points: 500, question: "Which store sold the first pre-lit Christmas trees?", size: '18vh', answer: 'Target'}, 
+    ]
+  },
+  {
+    name: 'Holiday Hodgepodge',
+    rows: [
+      {points: 100, question: "In which town was the baby Jesus born?", size: '18vh', answer: 'Bethlehem'}, 
+      {points: 200, question: "Who said \"Maybe Christmas doesn't come from a store, maybe Christmas, perhaps means more\"?", size: '14vh', answer: 'The Grinch'}, 
+      {points: 300, question: "Which American author wrote \"The Gift of the Magi\"?", size: '16vh', answer: 'O. Henry'}, 
+      {points: 400, question: "In which fantasy land is it \"always winter but never Christmas\"?", size: '15vh', answer: 'Narnia'}, 
+      {points: 500, question: "In what country is it a tradition to eat Kentucky Fried Chicken (KFC) on Christmas?", size: '15vh', answer: 'Japan. Orders must be placed up to two months in advance.'}
+    ]
+  }
+];

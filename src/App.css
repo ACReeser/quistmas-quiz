@@ -109,6 +109,8 @@ table.jeopardy td{
   background-repeat: no-repeat;
   background-position-x: center;
   text-shadow: 1px 0px 6px black;
+  background-position-y: center;
+  background-size: contain;
 }
 .modal .question .question-image{
   max-width: 100%;

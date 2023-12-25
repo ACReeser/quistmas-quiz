@@ -30,41 +30,41 @@ function beginGameState(teams: string[]): IGameState{
       {
         name: 'Melodymoji',
         rows: [
-          {points: 100, question: '\n🎵🔔🎵🔔🪨', size: '22vh', answer: '\'Jingle Bell Rock\''}, 
-          {points: 200, question: '\n👁️😴⬜🎄', size: '22vh', answer: '\'I\'m dreaming of a White Christmas\''},
-          {points: 300, question: '\nU🧈⌚🐽\nU🧈❌😭', size: '16vh', answer: 'You better watch out, you better not cry\n\'Santa Claus Is Comin’ to Town\''}, 
-          {points: 400, question: '\n🔥⬅️🔥😎', size: '21vh', answer:'"Fireside is blazing bright"\n\'This Christmas\''},
-          {points: 500, question: '\n🎄🎄⏲️ N👂', size: '18vh', answer: '"Christmas, Christmas time is near"\n\'The Chipmunk Song\''},
+          {points: 100, question: '\n😁2️⃣🌎🌍🌏', size: '22vh', answer: '\'Joy to the World\''},
+          {points: 200, question: '\n❗🎺😇🎶', size: '22vh', answer: '\'Hark the Herald Angels Sing\''}, 
+          {points: 300, question: '\n⬆️😮⌚📆', size: '21vh', answer: '\'It\'s the\nMost Wonderful Time of the Year \''}, 
+          {points: 400, question: '\n⭕⭐😮⭐🌒', size: '21vh', answer:'"O star of wonder, star of night"\n\'We Three Kings\''},
+          {points: 500, question: '\n🍁🫵🦵🦵', size: '22vh', answer: '"Fall on your knees"\n\'O Holy Night\''},
         ]
       },
       {
-        name: 'Famous Elf-ish',
+        name: 'Famous Elves',
         rows: [
-          {points: 100, question: "", imgSrc: 'https://i.imgur.com/47QzgLN.jpg', size: '14vh', answer: "\n\n\nDobby"}, 
-          {points: 200, question: "", imgSrc: 'https://i.imgur.com/nXSIrIo.jpg', size: '14vh', answer: '\n\n\nPapa Elf'}, 
-          {points: 300, question: "", imgSrc: 'https://i.imgur.com/EyutnT9.jpg', size: '14vh', answer: '\n\n\nJovie'}, 
-          {points: 400, question: "", imgSrc: 'https://i.imgur.com/7uFe3yv.jpg', size: '14vh', answer: '\n\n\nJudy'},
-          {points: 500, question: "", imgSrc: 'https://i.imgur.com/l0vIFBy.jpg', size: '14vh', answer: '\n\n\nMartha May Whovier'}, 
+          {points: 100, question: "", imgSrc: 'https://i.imgur.com/Fa3CN5a.png', size: '14vh', answer: '\n\n\nBuddy'}, 
+          {points: 200, question: "", imgSrc: 'https://i.imgur.com/K6GyyJ8.png', size: '14vh', answer: "\n\n\nBernard"}, 
+          {points: 300, question: "", imgSrc: 'https://i.imgur.com/Z9UD8kp.jpg', size: '16vh', answer: '\n\n\nHermey'}, 
+          {points: 400, question: "", imgSrc: 'https://i.imgur.com/D3ySiIU.jpg', size: '16vh', answer: '\n\n\nJingle & Jangle'}, 
+          {points: 500, question: "", imgSrc: 'https://i.imgur.com/i6Nqpg0.jpg', size: '18vh', answer: 'Wayne\n\n\'Prep & Landing\''}, 
         ]
       },
       {
         name: 'Tree Trivia',
         rows: [
-          {points: 100, question: "Most families top trees with stars, but some choose a winged ____.", size: '16vh', answer: 'Angel'}, 
-          {points: 200, question: "Norwegian families often adorn their trees on ‘Little Christmas Eve’ on what day of Dec?", size: '14vh', answer: "23rd of December"}, 
-          {points: 300, question: "Which continental European country supposedly created the Christmas tree tradition?", size: '14vh', answer: 'Germany, 1500s'}, 
-          {points: 400, question: "German-American tradition decorates trees with nuts, marzipan cookies, and what fruit?", size: '14vh', answer: 'Apples'}, 
-          {points: 500, question: "Before the FDA convinced companies to switch to plastic in 1972, tinsel used to be made out of what poisonous metal?", size: '14vh', answer: 'Lead'}, 
+          {points: 100, question: "Europeans in the 17th century lit ____ on their trees.", size: '18vh', answer: 'Candles.'}, 
+          {points: 200, question: "Which PNW US state cuts the most trees, at 4.7 million trees a year?", size: '16vh', answer: "Oregon"}, 
+          {points: 300, question: "Which U. S. President was the first to decorate a Christmas tree with electric lights?", size: '14vh', answer: 'Grover Cleveland in 1894'}, 
+          {points: 400, question: "Which English queen established the Christmas tree tradition in Great Britain?", size: '14vh', answer: 'Queen Victoria in 1848'}, 
+          {points: 500, question: "Which store sold the first pre-lit Christmas trees?", size: '18vh', answer: 'Target'}, 
         ]
       },
       {
         name: 'Holiday Hodgepodge',
         rows: [
-          {points: 100, question: "In the song 'Silent Night', what words follow 'Silent Night'?", size: '16vh', answer: 'Silent Night \\ Holy Night \\\nAll is calm \\ All is bright'}, 
-          {points: 200, question: "According to an animated TV special, who is Rudolph's son?", size: '17vh', answer: 'Robbie the Reindeer'}, 
-          {points: 300, question: "Which ballet introduced the celesta for the first time in an orchestral score?", size: '16vh', answer: 'The Nutcracker'}, 
-          {points: 400, question: "In the Christmas movie classic, Scrooged, what does Frank Cross (Bill Murray) give his brother for Christmas?", size: '14vh', answer: 'A monogrammed towel'}, 
-          {points: 500, question: "Dasher, Dancer, Prancer, Vixen, Comet, Cupid, Donner, Blitzen and Rudolph; which reindeer is named after thunder?", size: '13vh', answer: 'Donner is German for thunder.'}
+          {points: 100, question: "In which town was the baby Jesus born?", size: '18vh', answer: 'Bethlehem'}, 
+          {points: 200, question: "Who said \"Maybe Christmas doesn't come from a store, maybe Christmas, perhaps means more\"?", size: '14vh', answer: 'The Grinch'}, 
+          {points: 300, question: "Which American author wrote \"The Gift of the Magi\"?", size: '16vh', answer: 'O. Henry'}, 
+          {points: 400, question: "In which fantasy land is it \"always winter but never Christmas\"?", size: '15vh', answer: 'Narnia'}, 
+          {points: 500, question: "In what country is it a tradition to eat Kentucky Fried Chicken (KFC) on Christmas?", size: '15vh', answer: 'Japan. Orders must be placed up to two months in advance.'}
         ]
       }
     ],

@@ -106,3 +106,46 @@ export const QuestionSet3 = [
     ]
   }
 ];
+
+const QuestionSet4 = [
+  {
+    name: 'Melodymoji',
+    rows: [
+      {points: 100, question: '\n🎵🔔🎵🔔🪨', size: '22vh', answer: '\'Jingle Bell Rock\''}, 
+      {points: 200, question: '\n👁️😴⬜🎄', size: '22vh', answer: '\'I\'m dreaming of a White Christmas\''},
+      {points: 300, question: '\nU🧈⌚🐽\nU🧈❌😭', size: '16vh', answer: 'You better watch out, you better not cry\n\'Santa Claus Is Comin’ to Town\''}, 
+      {points: 400, question: '\n🔥⬅️🔥😎', size: '21vh', answer:'"Fireside is blazing bright"\n\'This Christmas\''},
+      {points: 500, question: '\n🎄🎄⏲️ N👂', size: '18vh', answer: '"Christmas, Christmas time is near"\n\'The Chipmunk Song\''},
+    ]
+  },
+  {
+    name: 'Famous Elf-ish',
+    rows: [
+      {points: 100, question: "", imgSrc: 'https://i.imgur.com/47QzgLN.jpg', size: '14vh', answer: "\n\n\nDobby"}, 
+      {points: 200, question: "", imgSrc: 'https://i.imgur.com/nXSIrIo.jpg', size: '14vh', answer: '\n\n\nPapa Elf'}, 
+      {points: 300, question: "", imgSrc: 'https://i.imgur.com/EyutnT9.jpg', size: '14vh', answer: '\n\n\nJovie'}, 
+      {points: 400, question: "", imgSrc: 'https://i.imgur.com/7uFe3yv.jpg', size: '14vh', answer: '\n\n\nJudy'},
+      {points: 500, question: "", imgSrc: 'https://i.imgur.com/l0vIFBy.jpg', size: '14vh', answer: '\n\n\nMartha May Whovier'}, 
+    ]
+  },
+  {
+    name: 'Tree Trivia',
+    rows: [
+      {points: 100, question: "Most families top trees with stars, but some choose a winged ____.", size: '16vh', answer: 'Angel'}, 
+      {points: 200, question: "Norwegian families often adorn their trees on ‘Little Christmas Eve’ on what day of Dec?", size: '14vh', answer: "23rd of December"}, 
+      {points: 300, question: "Which continental European country supposedly created the Christmas tree tradition?", size: '14vh', answer: 'Germany, 1500s'}, 
+      {points: 400, question: "German-American tradition decorates trees with nuts, marzipan cookies, and what fruit?", size: '14vh', answer: 'Apples'}, 
+      {points: 500, question: "Before the FDA convinced companies to switch to plastic in 1972, tinsel used to be made out of what poisonous metal?", size: '14vh', answer: 'Lead'}, 
+    ]
+  },
+  {
+    name: 'Holiday Hodgepodge',
+    rows: [
+      {points: 100, question: "In the song 'Silent Night', what words follow 'Silent Night'?", size: '16vh', answer: 'Silent Night \\ Holy Night \\\nAll is calm \\ All is bright'}, 
+      {points: 200, question: "According to an animated TV special, who is Rudolph's son?", size: '17vh', answer: 'Robbie the Reindeer'}, 
+      {points: 300, question: "Which ballet introduced the celesta for the first time in an orchestral score?", size: '16vh', answer: 'The Nutcracker'}, 
+      {points: 400, question: "In the Christmas movie classic, Scrooged, what does Frank Cross (Bill Murray) give his brother for Christmas?", size: '14vh', answer: 'A monogrammed towel'}, 
+      {points: 500, question: "Dasher, Dancer, Prancer, Vixen, Comet, Cupid, Donner, Blitzen and Rudolph; which reindeer is named after thunder?", size: '13vh', answer: 'Donner is German for thunder.'}
+    ]
+  }
+];

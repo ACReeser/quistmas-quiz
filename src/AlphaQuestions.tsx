@@ -1,4 +1,4 @@
-export const AlphaQuestions = [
+export const _2022_Questions_1 = [
     {
       name: 'Christmas Cinemoji',
       rows: [
@@ -31,7 +31,7 @@ export const AlphaQuestions = [
     }
   ];
 
-export const QuestionSet2 = [
+export const _2022_Questions_2 = [
   {
     name: 'Christmas Cinemoji',
     rows: [
@@ -64,7 +64,7 @@ export const QuestionSet2 = [
   }
 ];
 
-export const QuestionSet3 = [
+export const _2023_Questions_1 = [
   {
     name: 'Melodymoji',
     rows: [
@@ -107,7 +107,7 @@ export const QuestionSet3 = [
   }
 ];
 
-const QuestionSet4 = [
+const _2023_Questions_2 = [
   {
     name: 'Melodymoji',
     rows: [

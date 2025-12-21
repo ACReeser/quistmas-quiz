@@ -103,7 +103,7 @@ function beginGameState(teams: string[], initialCurrentTeam: number = 0, initial
         rows: [
           {points: 100, question: "What fossil fuel does Santa famously leave for \"naughty\" children?", size: '14vh', answer: 'Coal'}, 
           {points: 200, question: " In the song \"It’s the Most Wonderful Time of the Year,\" what 'scary' thing are people doing?", size: '14vh', answer: "Telling ghost stories"}, 
-          {points: 300, question: "What horned, Alpine \"Anti-Santa\" carries a sack to kidnap misbehaving kids", size: '14vh', answer: 'Krampus'}, 
+          {points: 300, question: "What horned, Alpine \"Anti-Santa\" carries a sack to kidnap misbehaving kids?", size: '14vh', answer: 'Krampus'}, 
           {points: 400, question: "In 1908, which industry began officially designating candle-lit Christmas trees as an 'unacceptable risk'?", size: '16vh', answer: 'Fire insurance industry'}, 
           {points: 500, question: "The predatory Jólakötturinn is a holiday monster from which Atlantic island nation?", size: '16vh', answer: 'Iceland'}, 
         ]
@@ -113,7 +113,7 @@ function beginGameState(teams: string[], initialCurrentTeam: number = 0, initial
         rows: [
           {points: 100, question: "\"I Saw Three Ships\" states a trio of vessels sailed into which landlocked Holy Land city?", size: '14vh', answer: 'Bethlehem'}, 
           {points: 200, question: "Which winter-winter-winter anthem was composed in the middle of a July 1945 heatwave?", size: '14vh', answer: "Let it Snow! Let it Snow! Let it Snow!"}, 
-          {points: 300, question: "In 1780, there were four \"colly birds\" (not calling birds) which were what color", size: '14vh', answer: 'Black'}, 
+          {points: 300, question: "In 1780, there were four \"colly birds\" (not calling birds) which were what color?", size: '14vh', answer: 'Black'}, 
           {points: 400, question: "\"How All the Welkin Rings\" was the original 1739 line of what Christmas hymn?", size: '16vh', answer: 'Hark! The Herald Angels Sing'}, 
           {points: 500, question: "Which Christmas melody originated as the 1901 Ukrainian New Year’s folk chant \"Shchedryk\"?", size: '16vh', answer: 'Carol of the Bells'}, 
         ]
@@ -253,21 +253,21 @@ function Game(props: {
             <tr>
               {
                 [0, 1, 2, 3, 4].map((cat) => {
-                  return <td onClick={zoomQuestion(cat, 1)} style={{fontWeight: state.categories[cat].rows[1].special? 'normal' : 'bold'}}>{state.categories[cat].rows[1].points}</td>
+                  return <td onClick={zoomQuestion(cat, 1)}>{state.categories[cat].rows[1].points}</td>
                 })
               }
             </tr>
             <tr>
               {
                 [0, 1, 2, 3, 4].map((cat) => {
-                  return <td onClick={zoomQuestion(cat, 2)} style={{fontWeight: state.categories[cat].rows[2].special? 'normal' : 'bold'}}>{state.categories[cat].rows[2].points}</td>
+                  return <td onClick={zoomQuestion(cat, 2)}>{state.categories[cat].rows[2].points}</td>
                 })
               }
             </tr>
             <tr>
               {
                 [0, 1, 2, 3, 4].map((cat) => {
-                  return <td onClick={zoomQuestion(cat, 3)} style={{fontWeight: state.categories[cat].rows[3].special? 'normal' : 'bold'}}>{state.categories[cat].rows[3].points}</td>
+                  return <td onClick={zoomQuestion(cat, 3)}>{state.categories[cat].rows[3].points}</td>
                 })
               }
             </tr>

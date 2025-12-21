@@ -41,6 +41,9 @@
 }
 .App-header{
   font-size: calc(10px + 2vmin);
+  display: flex;
+  flex-direction: column;
+  gap: 2vh;
 }
 .App-flex-grow{
   flex-grow: 1;
@@ -55,6 +58,28 @@
 .App a.disabled {
   color: grey;
   cursor: default;
+}
+.App-header .App-link {
+  font-size: clamp(1.5rem, 4vmin, 3rem);
+  padding: 1.5vh 3vw;
+  text-decoration: none;
+  background-color: rgba(31, 99, 0, 0.9);
+  color: white;
+  border: 2px solid #61dafb;
+  border-radius: 0.5em;
+  transition: all 0.2s ease;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.App-header .App-link:hover:not(.disabled) {
+  background-color: rgba(31, 99, 0, 1);
+  transform: scale(1.05);
+}
+.App-header .App-link.disabled {
+  border-color: grey;
+  opacity: 0.5;
 }
 .App button {
   font-size: 2em;

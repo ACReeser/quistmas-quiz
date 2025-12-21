@@ -2,6 +2,55 @@ import React, { useState } from 'react';
 import './App.css';
 import Question from './Question';
 
+// Randomly assigns NAUGHTY and NICE squares (2 of each) to eligible questions
+// Eligible = 200, 300, or 400 point questions (not 100 or 500)
+// Evenly distributed across categories and point values
+function assignSpecialSquares(categories: IGameState['categories']) {
+  // Build list of eligible squares (row indices 1, 2, 3 = 200, 300, 400 points)
+  const eligible: {catI: number, rowI: number}[] = [];
+  for (let catI = 0; catI < categories.length; catI++) {
+    for (let rowI = 1; rowI <= 3; rowI++) { // Skip row 0 (100) and row 4 (500)
+      eligible.push({catI, rowI});
+    }
+  }
+  
+  // Shuffle the eligible squares using Fisher-Yates algorithm
+  for (let i = eligible.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [eligible[i], eligible[j]] = [eligible[j], eligible[i]];
+  }
+  
+  // Try to pick 4 squares with good distribution
+  // Strategy: Pick from shuffled list but try to avoid same category/row when possible
+  const picked: {catI: number, rowI: number}[] = [];
+  const usedCats = new Set<number>();
+  const usedRows = new Set<number>();
+  
+  // First pass: try to pick with maximum diversity
+  for (const square of eligible) {
+    if (picked.length >= 4) break;
+    if (!usedCats.has(square.catI) && !usedRows.has(square.rowI)) {
+      picked.push(square);
+      usedCats.add(square.catI);
+      usedRows.add(square.rowI);
+    }
+  }
+  
+  // Second pass: fill remaining slots with any available squares
+  for (const square of eligible) {
+    if (picked.length >= 4) break;
+    if (!picked.some(p => p.catI === square.catI && p.rowI === square.rowI)) {
+      picked.push(square);
+    }
+  }
+  
+  // Assign first 2 as NAUGHTY, last 2 as NICE
+  for (let i = 0; i < picked.length; i++) {
+    const {catI, rowI} = picked[i];
+    categories[catI].rows[rowI].special = i < 2 ? 'NAUGHTY' : 'NICE';
+  }
+}
+
 interface IGameState{
   categories: {
     name: string,
@@ -10,7 +59,8 @@ interface IGameState{
       imgSrc?: string,
       question: string,
       size: string,
-      answer: string
+      answer: string,
+      special?: 'NAUGHTY' | 'NICE'
     }[]
   }[],
   pointSum: number[],
@@ -20,14 +70,15 @@ interface IGameState{
     rowI: number, 
     size: string, 
     answer: string,
-    imgSrc?: string
+    imgSrc?: string,
+    special?: 'NAUGHTY' | 'NICE'
   },
   currentTeamTurn: number,
   nextTeamTurn: number
 }
 
 function beginGameState(teams: string[], initialCurrentTeam: number = 0, initialNextTeam: number = 1): IGameState{
-  return {
+  const gameState: IGameState = {
     categories: [
       {
         name: 'Yummoji',
@@ -83,7 +134,12 @@ function beginGameState(teams: string[], initialCurrentTeam: number = 0, initial
     pointSum: teams.map(x => 0),
     currentTeamTurn: initialCurrentTeam,
     nextTeamTurn: initialNextTeam
-  }
+  };
+  
+  // Assign NAUGHTY and NICE squares
+  assignSpecialSquares(gameState.categories);
+  
+  return gameState;
 }
 
 function loadZeroedQuestions(): {cat: number, i: number}[]{
@@ -148,7 +204,8 @@ function Game(props: {
               rowI: rowI, 
               size: row.size, 
               answer: row.answer,
-              imgSrc: row.imgSrc
+              imgSrc: row.imgSrc,
+              special: row.special
             }
           });
         }
@@ -187,21 +244,21 @@ function Game(props: {
             <tr>
               {
                 [0, 1, 2, 3, 4].map((cat) => {
-                  return <td onClick={zoomQuestion(cat, 1)}>{state.categories[cat].rows[1].points}</td>
+                  return <td onClick={zoomQuestion(cat, 1)} style={{fontWeight: state.categories[cat].rows[1].special? 'normal' : 'bold'}}>{state.categories[cat].rows[1].points}</td>
                 })
               }
             </tr>
             <tr>
               {
                 [0, 1, 2, 3, 4].map((cat) => {
-                  return <td onClick={zoomQuestion(cat, 2)}>{state.categories[cat].rows[2].points}</td>
+                  return <td onClick={zoomQuestion(cat, 2)} style={{fontWeight: state.categories[cat].rows[2].special? 'normal' : 'bold'}}>{state.categories[cat].rows[2].points}</td>
                 })
               }
             </tr>
             <tr>
               {
                 [0, 1, 2, 3, 4].map((cat) => {
-                  return <td onClick={zoomQuestion(cat, 3)}>{state.categories[cat].rows[3].points}</td>
+                  return <td onClick={zoomQuestion(cat, 3)} style={{fontWeight: state.categories[cat].rows[3].special? 'normal' : 'bold'}}>{state.categories[cat].rows[3].points}</td>
                 })
               }
             </tr>
@@ -238,6 +295,7 @@ function Game(props: {
           imgSrc={state.currentQuestion.imgSrc}
           currentTeamTurn={state.currentTeamTurn}
           nextTeamTurn={state.nextTeamTurn}
+          special={state.currentQuestion.special}
           close={(teamIndexForPoints: number) => {
             const categories = {...state.categories};
             const newPoints = [...state.pointSum];

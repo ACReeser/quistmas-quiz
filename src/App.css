@@ -149,3 +149,56 @@ button.team-name-small{
 .h-14vh{
   height: 14vh;
 }
+
+/* Special NAUGHTY/NICE card styles */
+.special-card {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  animation: zoomIn 0.4s ease-out;
+}
+
+.special-card-naughty {
+  background-color: crimson;
+}
+
+.special-card-nice {
+  background-color: green;
+}
+
+.special-card-text {
+  font-size: 20vh;
+  font-weight: bold;
+  color: white;
+  text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.5);
+  animation: pulseSize 0.4s ease-out;
+}
+
+@keyframes zoomIn {
+  from {
+    transform: scale(0.3);
+    opacity: 0.5;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes pulseSize {
+  0% {
+    transform: scale(0.5);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}

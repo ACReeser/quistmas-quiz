@@ -10,7 +10,8 @@ function Question(props: {
     imgSrc?: string,
     close: (teamIndexForPoints: number) => void,
     currentTeamTurn: number,
-    nextTeamTurn: number
+    nextTeamTurn: number,
+    special?: 'NAUGHTY' | 'NICE'
 }) {
     // Helper to get the scoop order, starting from a random team (not the current team)
     // ENSURES NO DUPLICATE SCOOPS: This creates a randomized array of all team indices
@@ -27,6 +28,7 @@ function Question(props: {
         return others;
     }
 
+    const [showSpecialCard, setShowSpecialCard] = useState(props.special != null);
     const [showAnswer, setShowAnswer] = useState(false);
     const [canShowAnswer, setCanShowAnswer] = useState(false);
     // Initialize scoop order once at component mount - teams will be visited sequentially
@@ -154,11 +156,32 @@ function Question(props: {
 
     return (
         <div className="modal">
-            <div className={"question " + imageDetails.class} style={{ fontSize: props.size, backgroundImage: imageDetails.background }}>
-                {showAnswer ? answerText : props.question}
-            </div>
-            <div className='App-flex-h' style={{alignItems: 'center', gap: '1em'}}>
-                <span style={{ ...teamLabelStyle, fontSize: '1.2em', margin: '0 1em' }}>
+            {showSpecialCard ? (
+                <div 
+                    className={"special-card special-card-" + props.special?.toLowerCase()}
+                    onClick={() => setShowSpecialCard(false)}
+                >
+                    <div className="special-card-text">{props.special}</div>
+                </div>
+            ) : (
+                <>
+                    <div className={"question " + imageDetails.class} style={{ fontSize: props.size, backgroundImage: imageDetails.background }}>
+                        {showAnswer ? answerText : props.question}
+                    </div>
+                    <div className='App-flex-h' style={{alignItems: 'center', gap: '1em'}}>
+                        {props.special && (
+                            <span style={{ 
+                                ...teamLabelStyle, 
+                                fontSize: '1.2em', 
+                                margin: '0 1em',
+                                padding: '0.3em 0.8em',
+                                borderRadius: '0.3em',
+                                background: props.special === 'NAUGHTY' ? 'crimson' : 'green'
+                            }}>
+                                {props.special}
+                            </span>
+                        )}
+                        <span style={{ ...teamLabelStyle, fontSize: '1.2em', margin: '0 1em' }}>
                     {!showAnswer
                         ? 'Up: ' + activeTeam
                         : (canShowAnswer && scoopedBy === null)
@@ -169,7 +192,7 @@ function Question(props: {
                                     ? `Scooped by: ${props.teams[scoopedBy]}`
                                     : 'No points'
                     }
-                </span>
+                        </span>
                 <button
                     style={{ background: 'green', color: 'white', fontWeight: 'bold', minWidth: 100, marginRight: 8, opacity: !showAnswer ? 1 : 0.5, cursor: !showAnswer ? 'pointer' : 'not-allowed' }}
                     onClick={handleCorrect}
@@ -204,7 +227,9 @@ function Question(props: {
                         Back to Board
                     </button>
                 )}
-            </div>
+                    </div>
+                </>
+            )}
         </div>
     );
 }

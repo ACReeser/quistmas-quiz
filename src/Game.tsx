@@ -21,10 +21,12 @@ interface IGameState{
     size: string, 
     answer: string,
     imgSrc?: string
-  }
+  },
+  currentTeamTurn: number,
+  nextTeamTurn: number
 }
 
-function beginGameState(teams: string[]): IGameState{
+function beginGameState(teams: string[], initialCurrentTeam: number = 0, initialNextTeam: number = 1): IGameState{
   return {
     categories: [
       {
@@ -78,7 +80,9 @@ function beginGameState(teams: string[]): IGameState{
         ]
       }
     ],
-    pointSum: teams.map(x => 0)
+    pointSum: teams.map(x => 0),
+    currentTeamTurn: initialCurrentTeam,
+    nextTeamTurn: initialNextTeam
   }
 }
 
@@ -109,10 +113,16 @@ function loadPoints(): number[]{
 
 function Game(props: {
   teams: string[],
-  backToMenu: () => void
+  backToMenu: () => void,
+  initialCurrentTeam?: number,
+  initialNextTeam?: number
 }) {
   const [state, setState] = useState<IGameState>(() => {
-    const template = beginGameState(props.teams);
+    const template = beginGameState(
+      props.teams,
+      props.initialCurrentTeam ?? 0,
+      props.initialNextTeam ?? ((props.teams.length > 1) ? 1 : 0)
+    );
     loadZeroedQuestions().forEach((q) => {
       if (q.cat != null && q.i != null){
         template.categories[q.cat].rows[q.i].points = null;
@@ -211,8 +221,8 @@ function Game(props: {
         </div>
         {
           props.teams.map((team, i) => {
-            return <div className='App-flex-grow team-display App-flex-v-small h-14vh'>
-              <div className="team-display-name">{team}</div>
+            return <div className='App-flex-grow team-display App-flex-v-small h-14vh' key={i}>
+              <div className="team-display-name">{team}{state.currentTeamTurn === i ? ' 🏁' : ''}</div>
               <div className="team-display-points">{state.pointSum[i]} points</div>
             </div>
           })
@@ -220,27 +230,45 @@ function Game(props: {
       </div>
       {
         state.currentQuestion != null ? 
-        <Question teams={props.teams} question={state.currentQuestion.question} size={state.currentQuestion.size} answer={state.currentQuestion.answer} imgSrc={state.currentQuestion.imgSrc} close={(teamIndexForPoints: number) => {
-          const categories = {...state.categories};
-          const newPoints = [...state.pointSum];
-          if (state.currentQuestion){
-            if (teamIndexForPoints > -1){
-              const questionPoints = categories[state.currentQuestion.categoryI].rows[state.currentQuestion.rowI].points;
-              if (questionPoints && newPoints[teamIndexForPoints] != null){
-                newPoints[teamIndexForPoints] += questionPoints;
-                localStorage.setItem('points', JSON.stringify(newPoints));
+        <Question 
+          teams={props.teams} 
+          question={state.currentQuestion.question} 
+          size={state.currentQuestion.size} 
+          answer={state.currentQuestion.answer} 
+          imgSrc={state.currentQuestion.imgSrc}
+          currentTeamTurn={state.currentTeamTurn}
+          nextTeamTurn={state.nextTeamTurn}
+          close={(teamIndexForPoints: number) => {
+            const categories = {...state.categories};
+            const newPoints = [...state.pointSum];
+            let newCurrent = state.currentTeamTurn;
+            let newNext = state.nextTeamTurn;
+            if (state.currentQuestion){
+              if (teamIndexForPoints > -1){
+                const questionPoints = categories[state.currentQuestion.categoryI].rows[state.currentQuestion.rowI].points;
+                if (questionPoints && newPoints[teamIndexForPoints] != null){
+                  newPoints[teamIndexForPoints] += questionPoints;
+                  localStorage.setItem('points', JSON.stringify(newPoints));
+                }
+              }
+              categories[state.currentQuestion.categoryI].rows[state.currentQuestion.rowI].points = null;
+              localStorage.setItem('done', JSON.stringify(loadZeroedQuestions().concat([{cat: state.currentQuestion.categoryI, i: state.currentQuestion.rowI}])));
+              // Advance turn if a team was selected
+              if (teamIndexForPoints > -1) {
+                newCurrent = state.nextTeamTurn;
+                newNext = (state.nextTeamTurn + 1) % props.teams.length;
               }
             }
-            categories[state.currentQuestion.categoryI].rows[state.currentQuestion.rowI].points = null;
-            localStorage.setItem('done', JSON.stringify(loadZeroedQuestions().concat([{cat: state.currentQuestion.categoryI, i: state.currentQuestion.rowI}])));
-          }
-          setState({
-            ...state,
-            currentQuestion: undefined,
-            categories: categories,
-            pointSum: newPoints
-          })
-        }}></Question> : null
+            setState({
+              ...state,
+              currentQuestion: undefined,
+              categories: categories,
+              pointSum: newPoints,
+              currentTeamTurn: newCurrent,
+              nextTeamTurn: newNext
+            })
+          }}
+        ></Question> : null
       }
     </div>
   );

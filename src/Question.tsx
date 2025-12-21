@@ -8,43 +8,163 @@ function Question(props: {
     size: string,
     answer: string,
     imgSrc?: string,
-    close: (teamIndexForPoints: number) => void
-  }) {
-    
-  const [showQuestion, setQuestionOrAnswer] = useState(true);
-  const imageDetails = {
-    background: props.imgSrc != null ? `url(${props.imgSrc})` : '',
-    class: props.imgSrc != null ? 'is-image' : '',
-  };
-  const answerText = props.imgSrc != null ? props.answer : 'A: '+props.answer;
-  return (
-    <div className="modal">
-        <div className={"question "+imageDetails.class} style={{'fontSize': props.size, backgroundImage: imageDetails.background}}>
-            {
-                showQuestion ? props.question : answerText
+    close: (teamIndexForPoints: number) => void,
+    currentTeamTurn: number,
+    nextTeamTurn: number
+}) {
+    const [showAnswer, setShowAnswer] = useState(false);
+    const [canShowAnswer, setCanShowAnswer] = useState(false);
+    const [scoopState, setScoopState] = useState<{
+        active: boolean,
+        scoopTeam: number|null,
+        alreadyTried: number[],
+        scoopOrder: number[]
+    }>({ active: false, scoopTeam: null, alreadyTried: [], scoopOrder: [] });
+
+    const imageDetails = {
+        background: props.imgSrc != null ? `url(${props.imgSrc})` : '',
+        class: props.imgSrc != null ? 'is-image' : '',
+    };
+    const answerText = props.imgSrc != null ? props.answer : 'A: ' + props.answer;
+    const teamLabelStyle = { color: 'white', fontWeight: 'bold' };
+
+    // Determine which team is currently "active" for answering
+    let activeTeamIndex = scoopState.active && scoopState.scoopTeam !== null ? scoopState.scoopTeam : props.currentTeamTurn;
+    let activeTeam = props.teams[activeTeamIndex] || '';
+
+    // Determine the next scoop team (for display)
+    let nextScoopTeam = '';
+    if (scoopState.active && scoopState.scoopOrder.length > 1) {
+        nextScoopTeam = props.teams[scoopState.scoopOrder[1]] || '';
+    } else if (!scoopState.active) {
+        nextScoopTeam = props.teams[props.nextTeamTurn] || '';
+    }
+
+    // Helper to get the scoop order, starting from a random team (not the current team)
+    function getRandomScoopOrder() {
+        const n = props.teams.length;
+        const others = Array.from({length: n}, (_, i) => i).filter(i => i !== props.currentTeamTurn);
+        for (let i = others.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [others[i], others[j]] = [others[j], others[i]];
+        }
+        return others;
+    }
+
+    // Handler for "Correct" button
+    function handleCorrect() {
+        if (showAnswer) return;
+        setCanShowAnswer(true);
+        setShowAnswer(true);
+        // Do not call props.close() here; wait for Back to Board
+        setScoopState({ active: false, scoopTeam: null, alreadyTried: [], scoopOrder: [] });
+    }
+
+    // Handler for "Incorrect" button
+    function handleIncorrect() {
+        if (showAnswer) return;
+        // If not in scoop mode, start scoop mode
+        if (!scoopState.active) {
+            const scoopOrder = getRandomScoopOrder();
+            if (scoopOrder.length === 0) {
+                // No one left to scoop, show the answer and allow Back to Board
+                setCanShowAnswer(true);
+                setShowAnswer(true);
+                setScoopState({ active: false, scoopTeam: null, alreadyTried: [], scoopOrder: [] });
+                return;
             }
-        </div>
-        <div className='App-flex-h'>
-            {
-                props.teams.map((teamName, i) => {
-                    return <button onClick={() => props.close(i)} className="team-name-small">
-                        {teamName} ✅
+            setScoopState({
+                active: true,
+                scoopTeam: scoopOrder[0],
+                alreadyTried: [props.currentTeamTurn],
+                scoopOrder
+            });
+        } else {
+            // In scoop mode, move to next scoop team
+            const { scoopOrder, alreadyTried } = scoopState;
+            const newAlreadyTried = [...alreadyTried, scoopOrder[0]];
+            const newOrder = scoopOrder.slice(1);
+            if (newOrder.length === 0) {
+                // No more teams left to scoop, show the answer and allow Back to Board
+                setCanShowAnswer(true);
+                setShowAnswer(true);
+                setScoopState({ active: false, scoopTeam: null, alreadyTried: [], scoopOrder: [] });
+            } else {
+                setScoopState({
+                    active: true,
+                    scoopTeam: newOrder[0],
+                    alreadyTried: newAlreadyTried,
+                    scoopOrder: newOrder
+                });
+            }
+        }
+    }
+
+    // Handler for "Show Answer" button
+    function handleShowAnswer() {
+        setShowAnswer(true);
+    }
+
+    // Handler for "Back to Board" button
+    function handleBackToBoard() {
+        // If answer was correct, pass the active team index; if not, pass -1 (all wrong)
+        if (showAnswer && canShowAnswer && !scoopState.active) {
+            // Award points to the team that got it correct
+            if (typeof activeTeamIndex === 'number' && !isNaN(activeTeamIndex)) {
+                props.close(activeTeamIndex);
+            } else {
+                props.close(-1);
+            }
+        } else {
+            // If answer was not correct, or scoop mode ended, treat as all wrong
+            props.close(-1);
+        }
+    }
+
+    return (
+        <div className="modal">
+            <div className={"question " + imageDetails.class} style={{ fontSize: props.size, backgroundImage: imageDetails.background }}>
+                {showAnswer ? answerText : props.question}
+            </div>
+            <div className='App-flex-h' style={{alignItems: 'center', gap: '1em'}}>
+                <span style={{ ...teamLabelStyle, fontSize: '1.2em', margin: '0 1em' }}>{activeTeam}</span>
+                <button
+                    style={{ background: 'green', color: 'white', fontWeight: 'bold', minWidth: 100, marginRight: 8, opacity: !showAnswer ? 1 : 0.5, cursor: !showAnswer ? 'pointer' : 'not-allowed' }}
+                    onClick={handleCorrect}
+                    disabled={showAnswer}
+                >
+                    Correct ✅
+                </button>
+                <button
+                    style={{ background: 'crimson', color: 'white', fontWeight: 'bold', minWidth: 100, marginRight: 16, opacity: !showAnswer ? 1 : 0.5, cursor: !showAnswer ? 'pointer' : 'not-allowed' }}
+                    onClick={handleIncorrect}
+                    disabled={showAnswer}
+                >
+                    Incorrect ❌
+                </button>
+                {nextScoopTeam && !showAnswer && (
+                    <span style={{ ...teamLabelStyle, fontSize: '1em', marginLeft: 8 }}>
+                        Scoop: {nextScoopTeam}
+                    </span>
+                )}
+                {!showAnswer && (<button
+                    style={{ background: '#222', color: 'white', fontWeight: 'bold', minWidth: 120 }}
+                    onClick={handleShowAnswer}
+                >
+                    Answer
+                </button>
+                )}
+                {showAnswer && (
+                    <button
+                        style={{ background: '#222', color: 'white', fontWeight: 'bold', minWidth: 140, marginLeft: 16 }}
+                        onClick={handleBackToBoard}
+                    >
+                        Back to Board
                     </button>
-                })
-            }
-            <button onClick={() => props.close(-1)} className="team-name-small">
-                All Wrong ❌
-            </button>
-            <button className='blue' onClick={() => {
-                setQuestionOrAnswer(!showQuestion);
-            }}>
-                {
-                    showQuestion ? 'A' : 'Q'
-                }
-            </button>
+                )}
+            </div>
         </div>
-    </div>
-  );
+    );
 }
 
 export default Question;

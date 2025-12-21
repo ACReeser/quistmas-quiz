@@ -20,6 +20,7 @@ function Question(props: {
         alreadyTried: number[],
         scoopOrder: number[]
     }>({ active: false, scoopTeam: null, alreadyTried: [], scoopOrder: [] });
+    const [scoopedBy, setScoopedBy] = useState<number|null>(null);
 
     const imageDetails = {
         background: props.imgSrc != null ? `url(${props.imgSrc})` : '',
@@ -56,7 +57,12 @@ function Question(props: {
         if (showAnswer) return;
         setCanShowAnswer(true);
         setShowAnswer(true);
-        // Do not call props.close() here; wait for Back to Board
+        // If in scoop mode, record who scooped
+        if (scoopState.active && scoopState.scoopTeam !== null) {
+            setScoopedBy(scoopState.scoopTeam); // scoop team answered
+        } else {
+            setScoopedBy(props.currentTeamTurn); // original team answered
+        }
         setScoopState({ active: false, scoopTeam: null, alreadyTried: [], scoopOrder: [] });
     }
 
@@ -103,6 +109,23 @@ function Question(props: {
     // Handler for "Show Answer" button
     function handleShowAnswer() {
         setShowAnswer(true);
+                    // Team label for display
+                    let teamLabel = '';
+                    if (!showAnswer) {
+                        teamLabel = activeTeam;
+                    } else {
+                        // In show answer mode
+                        if (scoopState.alreadyTried.length > 0 && scoopState.alreadyTried.length === props.teams.length - 1 && scoopState.scoopTeam !== null) {
+                            // All other teams tried, last team scooped
+                            teamLabel = `Scooped by: ${activeTeam}`;
+                        } else if (scoopState.scoopTeam !== null) {
+                            // If scoop mode was active and a team answered
+                            teamLabel = `Scooped by: ${activeTeam}`;
+                        } else {
+                            // Regular answer
+                            teamLabel = `Answered by: ${activeTeam}`;
+                        }
+                    }
     }
 
     // Handler for "Back to Board" button
@@ -127,7 +150,18 @@ function Question(props: {
                 {showAnswer ? answerText : props.question}
             </div>
             <div className='App-flex-h' style={{alignItems: 'center', gap: '1em'}}>
-                <span style={{ ...teamLabelStyle, fontSize: '1.2em', margin: '0 1em' }}>{activeTeam}</span>
+                <span style={{ ...teamLabelStyle, fontSize: '1.2em', margin: '0 1em' }}>
+                    {!showAnswer
+                        ? 'Up: ' + activeTeam
+                        : (canShowAnswer && scoopedBy === null)
+                            ? 'No points'
+                            : (scoopedBy === props.currentTeamTurn)
+                                ? `Answered by: ${props.teams[props.currentTeamTurn]}`
+                                : (scoopedBy !== null)
+                                    ? `Scooped by: ${props.teams[scoopedBy]}`
+                                    : 'No points'
+                    }
+                </span>
                 <button
                     style={{ background: 'green', color: 'white', fontWeight: 'bold', minWidth: 100, marginRight: 8, opacity: !showAnswer ? 1 : 0.5, cursor: !showAnswer ? 'pointer' : 'not-allowed' }}
                     onClick={handleCorrect}

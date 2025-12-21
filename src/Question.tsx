@@ -12,8 +12,26 @@ function Question(props: {
     currentTeamTurn: number,
     nextTeamTurn: number
 }) {
+    // Helper to get the scoop order, starting from a random team (not the current team)
+    // ENSURES NO DUPLICATE SCOOPS: This creates a randomized array of all team indices
+    // EXCEPT the current team. Each team appears exactly once in this array.
+    function getRandomScoopOrder() {
+        const n = props.teams.length;
+        // Filter out the current team - they already had their chance
+        const others = Array.from({length: n}, (_, i) => i).filter(i => i !== props.currentTeamTurn);
+        // Shuffle using Fisher-Yates algorithm
+        for (let i = others.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [others[i], others[j]] = [others[j], others[i]];
+        }
+        return others;
+    }
+
     const [showAnswer, setShowAnswer] = useState(false);
     const [canShowAnswer, setCanShowAnswer] = useState(false);
+    // Initialize scoop order once at component mount - teams will be visited sequentially
+    // from this randomized list, ensuring each team gets at most ONE scoop attempt per question
+    const [initialScoopOrder] = useState<number[]>(getRandomScoopOrder());
     const [scoopState, setScoopState] = useState<{
         active: boolean,
         scoopTeam: number|null,
@@ -37,19 +55,8 @@ function Question(props: {
     let nextScoopTeam = '';
     if (scoopState.active && scoopState.scoopOrder.length > 1) {
         nextScoopTeam = props.teams[scoopState.scoopOrder[1]] || '';
-    } else if (!scoopState.active) {
-        nextScoopTeam = props.teams[props.nextTeamTurn] || '';
-    }
-
-    // Helper to get the scoop order, starting from a random team (not the current team)
-    function getRandomScoopOrder() {
-        const n = props.teams.length;
-        const others = Array.from({length: n}, (_, i) => i).filter(i => i !== props.currentTeamTurn);
-        for (let i = others.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [others[i], others[j]] = [others[j], others[i]];
-        }
-        return others;
+    } else if (!scoopState.active && initialScoopOrder.length > 0) {
+        nextScoopTeam = props.teams[initialScoopOrder[0]] || '';
     }
 
     // Handler for "Correct" button
@@ -71,8 +78,7 @@ function Question(props: {
         if (showAnswer) return;
         // If not in scoop mode, start scoop mode
         if (!scoopState.active) {
-            const scoopOrder = getRandomScoopOrder();
-            if (scoopOrder.length === 0) {
+            if (initialScoopOrder.length === 0) {
                 // No one left to scoop, show the answer and allow Back to Board
                 setCanShowAnswer(true);
                 setShowAnswer(true);
@@ -81,15 +87,17 @@ function Question(props: {
             }
             setScoopState({
                 active: true,
-                scoopTeam: scoopOrder[0],
+                scoopTeam: initialScoopOrder[0],
                 alreadyTried: [props.currentTeamTurn],
-                scoopOrder
+                scoopOrder: initialScoopOrder
             });
         } else {
             // In scoop mode, move to next scoop team
+            // NO DUPLICATE SCOOPS: We slice off the first team from scoopOrder each time,
+            // moving sequentially through the pre-randomized list without repetition
             const { scoopOrder, alreadyTried } = scoopState;
             const newAlreadyTried = [...alreadyTried, scoopOrder[0]];
-            const newOrder = scoopOrder.slice(1);
+            const newOrder = scoopOrder.slice(1); // Remove current team, move to next
             if (newOrder.length === 0) {
                 // No more teams left to scoop, show the answer and allow Back to Board
                 setCanShowAnswer(true);

@@ -48,6 +48,16 @@ function beginGameState(teams: string[]): IGameState{
         ]
       },
       {
+        name: 'Misleading Melodies',
+        rows: [
+          {points: 100, question: "\"I Saw Three Ships\" states a trio of vessels sailed into which landlocked Holy Land city?", size: '14vh', answer: 'Bethlehem'}, 
+          {points: 200, question: "Which winter-winter-winter anthem was composed in the middle of a July 1945 heatwave?", size: '14vh', answer: "Let it Snow! Let it Snow! Let it Snow!"}, 
+          {points: 300, question: "In 1780, there were four \"colly birds\" (not calling birds) which were what color", size: '14vh', answer: 'Black'}, 
+          {points: 400, question: "\"How All the Welkin Rings\" was the original 1739 line of what Christmas hymn?", size: '16vh', answer: 'Hark! The Herald Angels Sing'}, 
+          {points: 500, question: "Which Christmas melody originated as the 1901 Ukrainian New Year’s folk chant \"Shchedryk\"?", size: '16vh', answer: 'Carol of the Bells'}, 
+        ]
+      },
+      {
         name: 'Christmas Crime',
         rows: [
           {points: 100, question: "In the movie Home Alone, the \"Wet Bandits\" earn their nickname by doing what to every house they burgle?", size: '16vh', answer: 'Leaving the water running'}, 
@@ -153,38 +163,41 @@ function Game(props: {
               <th>
                 {state.categories[3].name}
               </th>
+              <th>
+                {state.categories[4].name}
+              </th>
             </tr>
             <tr>
               {
-                [0, 1, 2, 3].map((cat) => {
+                [0, 1, 2, 3, 4].map((cat) => {
                   return <td onClick={zoomQuestion(cat, 0)}>{state.categories[cat].rows[0].points}</td>
                 })
               }
             </tr>
             <tr>
               {
-                [0, 1, 2, 3].map((cat) => {
+                [0, 1, 2, 3, 4].map((cat) => {
                   return <td onClick={zoomQuestion(cat, 1)}>{state.categories[cat].rows[1].points}</td>
                 })
               }
             </tr>
             <tr>
               {
-                [0, 1, 2, 3].map((cat) => {
+                [0, 1, 2, 3, 4].map((cat) => {
                   return <td onClick={zoomQuestion(cat, 2)}>{state.categories[cat].rows[2].points}</td>
                 })
               }
             </tr>
             <tr>
               {
-                [0, 1, 2, 3].map((cat) => {
+                [0, 1, 2, 3, 4].map((cat) => {
                   return <td onClick={zoomQuestion(cat, 3)}>{state.categories[cat].rows[3].points}</td>
                 })
               }
             </tr>
             <tr>
               {
-                [0, 1, 2, 3].map((cat) => {
+                [0, 1, 2, 3, 4].map((cat) => {
                   return <td onClick={zoomQuestion(cat, 4)}>{state.categories[cat].rows[4].points}</td>
                 })
               }

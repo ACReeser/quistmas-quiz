@@ -307,7 +307,7 @@ function Game(props: {
           nextTeamTurn={state.nextTeamTurn}
           special={state.currentQuestion.special}
           specialPoints={state.currentQuestion.specialPoints}
-          close={(teamIndexForPoints: number, otherTeamIndex?: number) => {
+          close={(teamIndexForPoints: number, naughtyNiceTeamIndex?: number) => {
             const categories = {...state.categories};
             const newPoints = [...state.pointSum];
             let newCurrent = state.currentTeamTurn;
@@ -319,9 +319,9 @@ function Game(props: {
                   newPoints[teamIndexForPoints] += questionPoints;
                 }
                 // Apply special points to other team if this is a special question
-                if (otherTeamIndex != null && otherTeamIndex >= 0 && state.currentQuestion.specialPoints != null) {
-                  if (newPoints[otherTeamIndex] != null) {
-                    newPoints[otherTeamIndex] += state.currentQuestion.specialPoints;
+                if (naughtyNiceTeamIndex != null && naughtyNiceTeamIndex >= 0 && state.currentQuestion.specialPoints != null) {
+                  if (newPoints[naughtyNiceTeamIndex] != null) {
+                    newPoints[naughtyNiceTeamIndex] = Math.max(0, newPoints[naughtyNiceTeamIndex] + state.currentQuestion.specialPoints);
                   }
                 }
                 localStorage.setItem('points', JSON.stringify(newPoints));

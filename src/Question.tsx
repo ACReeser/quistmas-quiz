@@ -184,7 +184,7 @@ function Question(props: {
                                     {props.teams.map((team, i) => {
                                         if (i === scoopedBy) return null; // Can't pick the team that answered correctly
                                         const currentScore = props.teamScores[i] || 0;
-                                        const newScore = currentScore + (props.specialPoints || 0);
+                                        const newScore = Math.max(0, currentScore + (props.specialPoints || 0));
                                         return (
                                             <button
                                                 key={i}

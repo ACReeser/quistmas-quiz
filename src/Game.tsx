@@ -45,9 +45,15 @@ function assignSpecialSquares(categories: IGameState['categories']) {
   }
   
   // Assign first 2 as NAUGHTY, last 2 as NICE
+  // Also compute specialPoints: half of the question points, negative for NAUGHTY, positive for NICE
   for (let i = 0; i < picked.length; i++) {
     const {catI, rowI} = picked[i];
-    categories[catI].rows[rowI].special = i < 2 ? 'NAUGHTY' : 'NICE';
+    const isNaughty = i < 2;
+    categories[catI].rows[rowI].special = isNaughty ? 'NAUGHTY' : 'NICE';
+    const points = categories[catI].rows[rowI].points;
+    if (points) {
+      categories[catI].rows[rowI].specialPoints = isNaughty ? -Math.floor(points / 2) : Math.floor(points / 2);
+    }
   }
 }
 
@@ -60,7 +66,8 @@ interface IGameState{
       question: string,
       size: string,
       answer: string,
-      special?: 'NAUGHTY' | 'NICE'
+      special?: 'NAUGHTY' | 'NICE',
+      specialPoints?: number
     }[]
   }[],
   pointSum: number[],
@@ -71,7 +78,8 @@ interface IGameState{
     size: string, 
     answer: string,
     imgSrc?: string,
-    special?: 'NAUGHTY' | 'NICE'
+    special?: 'NAUGHTY' | 'NICE',
+    specialPoints?: number
   },
   currentTeamTurn: number,
   nextTeamTurn: number
@@ -205,7 +213,8 @@ function Game(props: {
               size: row.size, 
               answer: row.answer,
               imgSrc: row.imgSrc,
-              special: row.special
+              special: row.special,
+              specialPoints: row.specialPoints
             }
           });
         }
@@ -289,6 +298,7 @@ function Game(props: {
         state.currentQuestion != null ? 
         <Question 
           teams={props.teams} 
+          teamScores={state.pointSum}
           question={state.currentQuestion.question} 
           size={state.currentQuestion.size} 
           answer={state.currentQuestion.answer} 
@@ -296,7 +306,8 @@ function Game(props: {
           currentTeamTurn={state.currentTeamTurn}
           nextTeamTurn={state.nextTeamTurn}
           special={state.currentQuestion.special}
-          close={(teamIndexForPoints: number) => {
+          specialPoints={state.currentQuestion.specialPoints}
+          close={(teamIndexForPoints: number, otherTeamIndex?: number) => {
             const categories = {...state.categories};
             const newPoints = [...state.pointSum];
             let newCurrent = state.currentTeamTurn;
@@ -306,8 +317,14 @@ function Game(props: {
                 const questionPoints = categories[state.currentQuestion.categoryI].rows[state.currentQuestion.rowI].points;
                 if (questionPoints && newPoints[teamIndexForPoints] != null){
                   newPoints[teamIndexForPoints] += questionPoints;
-                  localStorage.setItem('points', JSON.stringify(newPoints));
                 }
+                // Apply special points to other team if this is a special question
+                if (otherTeamIndex != null && otherTeamIndex >= 0 && state.currentQuestion.specialPoints != null) {
+                  if (newPoints[otherTeamIndex] != null) {
+                    newPoints[otherTeamIndex] += state.currentQuestion.specialPoints;
+                  }
+                }
+                localStorage.setItem('points', JSON.stringify(newPoints));
               }
               categories[state.currentQuestion.categoryI].rows[state.currentQuestion.rowI].points = null;
               localStorage.setItem('done', JSON.stringify(loadZeroedQuestions().concat([{cat: state.currentQuestion.categoryI, i: state.currentQuestion.rowI}])));

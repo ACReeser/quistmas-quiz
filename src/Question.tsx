@@ -4,14 +4,16 @@ import './App.css';
 
 function Question(props: {
     teams: string[],
+    teamScores: number[],
     question: string,
     size: string,
     answer: string,
     imgSrc?: string,
-    close: (teamIndexForPoints: number) => void,
+    close: (teamIndexForPoints: number, otherTeamIndex?: number) => void,
     currentTeamTurn: number,
     nextTeamTurn: number,
-    special?: 'NAUGHTY' | 'NICE'
+    special?: 'NAUGHTY' | 'NICE',
+    specialPoints?: number
 }) {
     // Helper to get the scoop order, starting from a random team (not the current team)
     // ENSURES NO DUPLICATE SCOOPS: This creates a randomized array of all team indices
@@ -31,6 +33,7 @@ function Question(props: {
     const [showSpecialCard, setShowSpecialCard] = useState(props.special != null);
     const [showAnswer, setShowAnswer] = useState(false);
     const [canShowAnswer, setCanShowAnswer] = useState(false);
+    const [selectedOtherTeam, setSelectedOtherTeam] = useState<number|null>(null);
     // Initialize scoop order once at component mount - teams will be visited sequentially
     // from this randomized list, ensuring each team gets at most ONE scoop attempt per question
     const [initialScoopOrder] = useState<number[]>(getRandomScoopOrder());
@@ -144,7 +147,7 @@ function Question(props: {
         if (showAnswer && canShowAnswer && !scoopState.active) {
             // Award points to the team that got it correct
             if (typeof activeTeamIndex === 'number' && !isNaN(activeTeamIndex)) {
-                props.close(activeTeamIndex);
+                props.close(activeTeamIndex, selectedOtherTeam ?? undefined);
             } else {
                 props.close(-1);
             }
@@ -167,6 +170,50 @@ function Question(props: {
                 <>
                     <div className={"question " + imageDetails.class} style={{ fontSize: props.size, backgroundImage: imageDetails.background }}>
                         {showAnswer ? answerText : props.question}
+                        {showAnswer && props.special && canShowAnswer && (
+                            <div style={{ 
+                                fontSize: '5vh', 
+                                marginTop: '4vh',
+                                display: 'flex', 
+                                flexDirection: 'column', 
+                                alignItems: 'center',
+                                gap: '2vh'
+                            }}>
+                                <span style={{ color: 'white', fontWeight: 'bold' }}>Pick other team:</span>
+                                <div style={{ display: 'flex', flexDirection: 'column', gap: '1vh', alignItems: 'center' }}>
+                                    {props.teams.map((team, i) => {
+                                        if (i === scoopedBy) return null; // Can't pick the team that answered correctly
+                                        const currentScore = props.teamScores[i] || 0;
+                                        const newScore = currentScore + (props.specialPoints || 0);
+                                        return (
+                                            <button
+                                                key={i}
+                                                onClick={() => setSelectedOtherTeam(i)}
+                                                style={{
+                                                    background: selectedOtherTeam === i ? 'gold' : '#444',
+                                                    color: selectedOtherTeam === i ? 'black' : 'white',
+                                                    fontWeight: 'bold',
+                                                    fontSize: '3.5vh',
+                                                    minWidth: '40vh',
+                                                    padding: '1vh 2vh',
+                                                    border: selectedOtherTeam === i ? '3px solid white' : 'none',
+                                                    borderRadius: '1vh',
+                                                    cursor: 'pointer',
+                                                    display: 'flex',
+                                                    flexDirection: 'column',
+                                                    alignItems: 'center'
+                                                }}
+                                            >
+                                                <div>{team}</div>
+                                                <div style={{ fontSize: '2.5vh', marginTop: '0.5vh' }}>
+                                                    {currentScore} → {newScore}
+                                                </div>
+                                            </button>
+                                        );
+                                    })}
+                                </div>
+                            </div>
+                        )}
                     </div>
                     <div className='App-flex-h' style={{alignItems: 'center', gap: '1em'}}>
                         {props.special && (
@@ -178,7 +225,7 @@ function Question(props: {
                                 borderRadius: '0.3em',
                                 background: props.special === 'NAUGHTY' ? 'crimson' : 'green'
                             }}>
-                                {props.special}
+                                {props.special} ({props.specialPoints != null && props.specialPoints > 0 ? '+' : ''}{props.specialPoints})
                             </span>
                         )}
                         <span style={{ ...teamLabelStyle, fontSize: '1.2em', margin: '0 1em' }}>

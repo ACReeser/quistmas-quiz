@@ -101,30 +101,30 @@ function beginGameState(teams: string[], initialCurrentTeam: number = 0, initial
       {
         name: 'Holiday Horror',
         rows: [
-          {points: 100, question: "aaa?", size: '14vh', answer: 'Coal'}, 
-          {points: 200, question: "aaa?", size: '14vh', answer: "aa ghost stories"}, 
-          {points: 300, question: "aaa?", size: '14vh', answer: 'aa'}, 
-          {points: 400, question: "aaa?", size: '16vh', answer: 'Fiaare insurance industry'}, 
-          {points: 500, question: "aa?", size: '16vh', answer: 'aa'}, 
+          {points: 100, question: "Which cheery red plant was incorrectly said to be toxic by a 1919 urban legend?", size: '14vh', answer: 'Poinsettia'}, 
+          {points: 200, question: "Which Ghost is intentionally designed to look like the Grim Reaper?", size: '13vh', answer: "Christmas Yet to Come / Ghost of Christmas Future"}, 
+          {points: 300, question: "Which plant translates to \"dung-on-a-twig\" in its English / Germanic roots?", size: '14vh', answer: 'Mistletoe'}, 
+          {points: 400, question: "The original 1816 Mouse King had how many heads?", size: '16vh', answer: 'seven'}, 
+          {points: 500, question: "A popular and bizarre motif on Victorian-era Christmas cards in the late 1800s featured what common garden bird lying dead on its back?", size: '13vh', answer: 'Robins or Wrens'}, 
         ]
       },
       {
         name: 'Misleading Melodies',
         rows: [
-          {points: 200, question: "aaa?", size: '14vh', answer: "aaa"}, 
-          {points: 300, question: "Which incredibly popular Christmas song was originally written for Thanksgiving in 1857?", size: '15vh', answer: 'Jingle Bells'}, 
-          {points: 400, question: "This 1719 hymn was not about Christmas, but about Jesus' return, thus: \"the Lord is come\".", size: '16vh', answer: 'Joy to the World'}, 
-          {points: 400, question: "\"Tinkle Bells\" was the original title of which Christmas classic?", size: '14vh', answer: 'Silver Bells'}, 
-          {points: 500, question: "aaa?", size: '16vh', answer: 'aaa'}, 
+          {points: 100, question: "Which song about a reindeer is actually a modern 1948 melody written for the Montgomery Ward department store?", size: '14vh', answer: "Rudolph the Red-Nosed Reindeer"}, 
+          {points: 200, question: "Which incredibly popular Christmas song was originally written for Thanksgiving in 1857?", size: '15vh', answer: 'Jingle Bells'}, 
+          {points: 300, question: "This 1719 hymn was not about Christmas, but about Jesus' return, thus: \"the Lord is come\".", size: '16vh', answer: 'Joy to the World'}, 
+          {points: 400, question: "\"Tinkle Bells\" was the original 1950 title of which Christmas classic?", size: '14vh', answer: 'Silver Bells'}, 
+          {points: 500, question: "Irving Berlin wrote \"White Christmas\" while frequenting which snow-free hotel amenity?", size: '16vh', answer: 'Lounging at the poolside'}, 
         ]
       },
       {
         name: 'Christmas Crime',
         rows: [
-          {points: 100, question: "aaa?", size: '16vh', answer: 'aaa'}, 
-          {points: 200, question: "aaa?", size: '14vh', answer: "aaa"}, 
+          {points: 100, question: "What meaty dish does the Grinch steal from the Whos?", size: '16vh', answer: 'Roast Beast'}, 
+          {points: 200, question: "What term, popularized from 2007 onwards, is a rakish term for a \"suburban thief\"?", size: '14vh', answer: "Porch Pirate"}, 
           {points: 300, question: "On Christmas Eve in 1985, two men robbed Mayan and Aztec artifacts from a museum in which North American capital?", size: '16vh', answer: 'Mexico City'}, 
-          {points: 400, question: "In the 1920s, a man named John Gluck Jr. ran the \"Santa Claus Association\" that pretended to buy gifts in which major US city?", size: '14vh', answer: 'New York City'}, 
+          {points: 400, question: "In the 1920s, a man named John Gluck Jr. ran the \"Santa Claus Association\" that pretended to buy gifts in which major US city?", size: '13vh', answer: 'New York City'}, 
           {points: 500, question: "In 1644, the English Parliament under which head of state officially banned the eating of Christmas plum pudding for being too Catholic?", size: '13vh', answer: 'Oliver Cromwell'}, 
         ]
       },
@@ -134,8 +134,8 @@ function beginGameState(teams: string[], initialCurrentTeam: number = 0, initial
           {points: 100, question: "According to a 2020 poll by YouGov, 59% of millennials consider which film to be a \"Christmas Movie\"?", size: '14vh', answer: 'Die Hard'}, 
           {points: 200, question: "Sent on December 3, 1992, what two-word holiday greeting was the content of the world’s first-ever SMS text message?", size: '14vh', answer: 'Merry Christmas'}, 
           {points: 300, question: "During WWI, what was the name given to the unofficial series of widespread ceasefires along the Western Front around December 1914?", size: '13vh', answer: 'Christmas Truce'}, 
-          {points: 400, question: "?", size: '14vh', answer: 'aaa'}, 
-          {points: 500, question: "aaa?", size: '14vh', answer: 'aaa'}
+          {points: 400, question: "The world's first commercial Christmas card was commissioned by Sir Henry Cole in 1843. It caused a scandal because it depicted a young child drinking what?", size: '13vh', answer: 'Wine'}, 
+          {points: 500, question: "\"Xmas\", an abbreviation in use since at least the 1800s by Samuel Coleridge, Lord Byron, and Lewis Carroll, derives from which Greek letter?", size: '12vh', answer: 'Chi'},
         ]
       }
     ],

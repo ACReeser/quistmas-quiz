@@ -143,16 +143,12 @@ function Question(props: {
 
     // Handler for "Back to Board" button
     function handleBackToBoard() {
-        // If answer was correct, pass the active team index; if not, pass -1 (all wrong)
-        if (showAnswer && canShowAnswer && !scoopState.active) {
-            // Award points to the team that got it correct
-            if (typeof activeTeamIndex === 'number' && !isNaN(activeTeamIndex)) {
-                props.close(activeTeamIndex, selectedOtherTeam ?? undefined);
-            } else {
-                props.close(-1);
-            }
+        // If answer was correct, award points to whoever answered (tracked by scoopedBy)
+        if (canShowAnswer && scoopedBy !== null) {
+            // Award points to the team that got it correct (stored in scoopedBy)
+            props.close(scoopedBy, selectedOtherTeam ?? undefined);
         } else {
-            // If answer was not correct, or scoop mode ended, treat as all wrong
+            // If answer was not correct or no one answered, treat as all wrong
             props.close(-1);
         }
     }

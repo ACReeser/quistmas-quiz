@@ -89,53 +89,53 @@ function beginGameState(teams: string[], initialCurrentTeam: number = 0, initial
   const gameState: IGameState = {
     categories: [
       {
-        name: 'Yummoji',
+        name: 'Tradit-omoji',
         rows: [
-          {points: 100, question: '\n🦃🦆🐓', size: '22vh', answer: 'Turducken'}, 
-          {points: 200, question: '\n🎄🪵', size: '22vh', answer: 'Yule Log'},
-          {points: 300, question: '\n🫚🍞👨', size: '22vh', answer: 'Gingerbread Man'},
-          {points: 400, question: '\n🌶️🍬🐶', size: '21vh', answer: 'Peppermint Bark'}, 
-          {points: 500, question: '\n🍃🔑💩🛎️', size: '21vh', answer:'Figgy Pudding'},
+          {points: 100, question: '\n🤢👕🏆', size: '22vh', answer: 'Ugly Sweater Contest'}, 
+          {points: 200, question: '\n🧝‍♂️⤵️🐚f', size: '22vh', answer: 'Elf on the Shelf'},
+          {points: 300, question: '\n🕵️🎅', size: '22vh', answer: 'Secret Santa'},
+          {points: 400, question: '\n🥊🌅', size: '21vh', answer: 'Boxing Day'}, 
+          {points: 500, question: '\n♟️🥜🔥', size: '21vh', answer:'Chestnut Roasting'},
         ]
       },
       {
         name: 'Holiday Horror',
         rows: [
-          {points: 100, question: "What fossil fuel does Santa famously leave for \"naughty\" children?", size: '14vh', answer: 'Coal'}, 
-          {points: 200, question: " In the song \"It’s the Most Wonderful Time of the Year,\" what 'scary' thing are people doing?", size: '14vh', answer: "Telling ghost stories"}, 
-          {points: 300, question: "What horned, Alpine \"Anti-Santa\" carries a sack to kidnap misbehaving kids?", size: '14vh', answer: 'Krampus'}, 
-          {points: 400, question: "In 1908, which industry began officially designating candle-lit Christmas trees as an 'unacceptable risk'?", size: '16vh', answer: 'Fire insurance industry'}, 
-          {points: 500, question: "The predatory Jólakötturinn is a holiday monster from which Atlantic island nation?", size: '16vh', answer: 'Iceland'}, 
+          {points: 100, question: "aaa?", size: '14vh', answer: 'Coal'}, 
+          {points: 200, question: "aaa?", size: '14vh', answer: "aa ghost stories"}, 
+          {points: 300, question: "aaa?", size: '14vh', answer: 'aa'}, 
+          {points: 400, question: "aaa?", size: '16vh', answer: 'Fiaare insurance industry'}, 
+          {points: 500, question: "aa?", size: '16vh', answer: 'aa'}, 
         ]
       },
       {
         name: 'Misleading Melodies',
         rows: [
-          {points: 100, question: "\"I Saw Three Ships\" states a trio of vessels sailed into which landlocked Holy Land city?", size: '14vh', answer: 'Bethlehem'}, 
-          {points: 200, question: "Which winter-winter-winter anthem was composed in the middle of a July 1945 heatwave?", size: '14vh', answer: "Let it Snow! Let it Snow! Let it Snow!"}, 
-          {points: 300, question: "In 1780, there were four \"colly birds\" (not calling birds) which were what color?", size: '14vh', answer: 'Black'}, 
-          {points: 400, question: "\"How All the Welkin Rings\" was the original 1739 line of what Christmas hymn?", size: '16vh', answer: 'Hark! The Herald Angels Sing'}, 
-          {points: 500, question: "Which Christmas melody originated as the 1901 Ukrainian New Year’s folk chant \"Shchedryk\"?", size: '16vh', answer: 'Carol of the Bells'}, 
+          {points: 200, question: "aaa?", size: '14vh', answer: "aaa"}, 
+          {points: 300, question: "Which incredibly popular Christmas song was originally written for Thanksgiving in 1857?", size: '15vh', answer: 'Jingle Bells'}, 
+          {points: 400, question: "This 1719 hymn was not about Christmas, but about Jesus' return, thus: \"the Lord is come\".", size: '16vh', answer: 'Joy to the World'}, 
+          {points: 400, question: "\"Tinkle Bells\" was the original title of which Christmas classic?", size: '14vh', answer: 'Silver Bells'}, 
+          {points: 500, question: "aaa?", size: '16vh', answer: 'aaa'}, 
         ]
       },
       {
         name: 'Christmas Crime',
         rows: [
-          {points: 100, question: "In the movie Home Alone, the \"Wet Bandits\" earn their nickname by doing what to every house they burgle?", size: '16vh', answer: 'Leaving the water running'}, 
-          {points: 200, question: "A man dressed in a Santa suit robbed a San Francisco bank in Dec 2014, using what annual event to blend in and escape?", size: '14vh', answer: "SantaCon"}, 
-          {points: 300, question: "Until 1991, it was technically illegal to celebrate Christmas in which Caribbean island nation?", size: '16vh', answer: 'Cuba'}, 
-          {points: 400, question: "In 1826, 21 cadets at which military academy were punished for smuggling alcoholic eggnog into a barracks?", size: '14vh', answer: 'West Point'}, 
-          {points: 500, question: "In 1659, which North American colony passed a law making Christmas a criminal offense, punishable by a fine of five shillings?", size: '14vh', answer: 'Massachusetts'}, 
+          {points: 100, question: "aaa?", size: '16vh', answer: 'aaa'}, 
+          {points: 200, question: "aaa?", size: '14vh', answer: "aaa"}, 
+          {points: 300, question: "On Christmas Eve in 1985, two men robbed Mayan and Aztec artifacts from a museum in which North American capital?", size: '16vh', answer: 'Mexico City'}, 
+          {points: 400, question: "In the 1920s, a man named John Gluck Jr. ran the \"Santa Claus Association\" that pretended to buy gifts in which major US city?", size: '14vh', answer: 'New York City'}, 
+          {points: 500, question: "In 1644, the English Parliament under which head of state officially banned the eating of Christmas plum pudding for being too Catholic?", size: '13vh', answer: 'Oliver Cromwell'}, 
         ]
       },
       {
         name: 'Holiday Hodgepodge',
         rows: [
-          {points: 100, question: "Famous animator Chuck Jones recolored which holiday villain to green for the 1966 TV special?", size: '14vh', answer: 'The Grinch (from b&w)'}, 
-          {points: 200, question: "Legend says a German choirmaster created what treat in 1670 to keep children quiet during long church services?", size: '14vh', answer: 'Candy Cane'}, 
-          {points: 300, question: "To deliver presents to every household on Earth in one night, physicists estimate Santa would have to travel at roughly 0.5% of what measure?", size: '14vh', answer: 'Speed of light'}, 
-          {points: 400, question: "According to the Guinness World Records, the tallest Christmas tree ever displayed was a 221 ft. Douglas Fir erected in 1950 in what rainy city?", size: '14vh', answer: 'Seattle'}, 
-          {points: 500, question: "What is the highest-grossing Christmas movie of all time (when adjusted for inflation), at a cool $1.2 billion?", size: '14vh', answer: 'Home Alone'}
+          {points: 100, question: "According to a 2020 poll by YouGov, 59% of millennials consider which film to be a \"Christmas Movie\"?", size: '14vh', answer: 'Die Hard'}, 
+          {points: 200, question: "Sent on December 3, 1992, what two-word holiday greeting was the content of the world’s first-ever SMS text message?", size: '14vh', answer: 'Merry Christmas'}, 
+          {points: 300, question: "During WWI, what was the name given to the unofficial series of widespread ceasefires along the Western Front around December 1914?", size: '13vh', answer: 'Christmas Truce'}, 
+          {points: 400, question: "?", size: '14vh', answer: 'aaa'}, 
+          {points: 500, question: "aaa?", size: '14vh', answer: 'aaa'}
         ]
       }
     ],
